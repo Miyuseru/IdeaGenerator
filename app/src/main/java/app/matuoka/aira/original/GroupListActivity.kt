@@ -1,5 +1,6 @@
 package app.matuoka.aira.original
 
+
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +10,7 @@ import io.realm.RealmResults
 import io.realm.Sort
 import kotlinx.android.synthetic.main.activity_word_list.*
 
-class WordListActivity : AppCompatActivity() {
+class GroupListActivity : AppCompatActivity() {
 
     private val realm: Realm by lazy {
         Realm.getDefaultInstance()
@@ -17,10 +18,10 @@ class WordListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_word_list)
+        setContentView(R.layout.activity_group_list)
 
-        val wordList = readAll()
-        val adapter = WordAdapter(this, wordList, true)
+        val groupList = readAll()
+        val adapter = GroupAdapter(this, groupList, true)
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -38,8 +39,8 @@ class WordListActivity : AppCompatActivity() {
         realm.close()
     }
 
-    fun readAll(): RealmResults<Word> {
-        return realm.where(Word::class.java).findAll().sort("createdAt", Sort.ASCENDING)
+    fun readAll(): RealmResults<Group> {
+        return realm.where(Group::class.java).findAll().sort("createdAt", Sort.ASCENDING)
     }
 
 }

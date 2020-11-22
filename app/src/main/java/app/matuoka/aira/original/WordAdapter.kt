@@ -1,11 +1,11 @@
+package app.matuoka.aira.original
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import app.matuoka.aira.original.R
-import app.matuoka.aira.original.Word
 import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
 import kotlinx.android.synthetic.main.item_word_list.view.*
@@ -13,7 +13,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class WordAdapter(
-
     private val context: Context,
     private var wordList: OrderedRealmCollection<Word>?,
     private val autoUpdate: Boolean
