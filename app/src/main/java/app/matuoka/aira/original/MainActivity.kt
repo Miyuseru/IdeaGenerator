@@ -16,8 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener {
             val title: String = titleEditText.text.toString()
-            val content: String = contentEditText.text.toString()
-            save(title, content)
+            save(title)
             finish()
         }
     }
@@ -27,11 +26,11 @@ class MainActivity : AppCompatActivity() {
         realm.close()
     }
 
-    fun save(title: String, content: String) {
+    fun save(title: String) {
         realm.executeTransaction {
-            val newMemo: Memo = it.createObject(Memo::class.java, UUID.randomUUID().toString())
-            newMemo.title = title
-            newMemo.content = content
+            val word: Word = it.createObject(Word::class.java, UUID.randomUUID().toString())
+            word.title = title
+
         }
 
 //        Snackbar.make(container, "保存できました", Snackbar.LENGTH_SHORT).show()

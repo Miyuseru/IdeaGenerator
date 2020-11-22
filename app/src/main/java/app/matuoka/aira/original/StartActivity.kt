@@ -17,7 +17,7 @@ class StartActivity : AppCompatActivity() {
         }
 
         button2.setOnClickListener{
-            val torecyclerviewActivityIntent = Intent(this,RecyclerViewActivity::class.java)
+            val torecyclerviewActivityIntent = Intent(this,WordListActivity::class.java)
            startActivity(torecyclerviewActivityIntent)
         }
     }
