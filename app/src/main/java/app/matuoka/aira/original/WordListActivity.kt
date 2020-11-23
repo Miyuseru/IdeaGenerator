@@ -24,7 +24,8 @@ class WordListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_list)
 
-        val wordList = readAll()
+        val groupId = intent.getStringExtra("GroupId") ?: ""
+        val wordList = readAll(groupId)
         val adapter = WordAdapter(this, wordList, true)
 
         recyclerView.setHasFixedSize(true)
@@ -42,7 +43,7 @@ class WordListActivity : AppCompatActivity() {
                     if (title.isBlank()) {
                         Snackbar.make(container, "単語名を入れてね！！", Snackbar.LENGTH_SHORT).show()
                     } else {
-                        create(title)
+                        create(title, groupId)
                     }
                 }
                 .show()
@@ -55,14 +56,16 @@ class WordListActivity : AppCompatActivity() {
         realm.close()
     }
 
-    fun readAll(): RealmResults<Word> {
-        return realm.where(Word::class.java).findAll().sort("createdAt", Sort.ASCENDING)
+    fun readAll(groupId: String): RealmResults<Word> {
+        return realm.where(Word::class.java).equalTo("groupId", groupId).findAll()
+            .sort("createdAt", Sort.ASCENDING)
     }
 
-    fun create(title: String) {
+    fun create(title: String, groupId: String) {
         realm.executeTransaction {
             val word: Word = it.createObject(Word::class.java, UUID.randomUUID().toString())
             word.title = title
+            word.groupId = groupId
         }
     }
 

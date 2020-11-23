@@ -28,6 +28,7 @@ class GroupListActivity : AppCompatActivity() {
         val listener = object : GroupAdapter.OnItemClickListener {
             override fun onItemClick(item: Group) {
                 val intent = Intent(applicationContext, WordListActivity::class.java)
+                intent.putExtra("GroupId", item.id)
                 startActivity(intent)
             }
         }
