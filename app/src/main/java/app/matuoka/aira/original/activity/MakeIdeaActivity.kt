@@ -41,8 +41,8 @@ class MakeIdeaActivity : AppCompatActivity() {
 
         memoButton.setOnClickListener {
             val intent = Intent(this, IdeaActivity::class.java)
-            intent.putExtra("FIRST_WORD_TITLE", firstGroupWordList[firstRandomNum]?.id)
-            intent.putExtra("SECOND_WORD_TITLE", secondGroupWordList[secondRandomNum]?.id)
+            intent.putExtra("FIRST_WORD_TITLE", firstGroupWordList[firstRandomNum]?.title)
+            intent.putExtra("SECOND_WORD_TITLE", secondGroupWordList[secondRandomNum]?.title)
             startActivity(intent)
         }
     }
