@@ -24,9 +24,43 @@ class WordListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_list)
 
+        val listener = object : WordAdapter.OnItemClickListener {
+            override fun onItemClick(item: Word) {
+
+                val editText = EditText(this@WordListActivity)
+                editText.hint = "単語名"
+                editText.setText(item.title)
+
+                AlertDialog.Builder(this@WordListActivity)
+                    .setTitle("単語の編集")
+                    .setView(editText)
+                    .setPositiveButton("更新") { _, _ ->
+                        val title: String = editText.text.toString()
+                        if (title.isBlank()) {
+                            Snackbar.make(container, "単語名を入れてね！！", Snackbar.LENGTH_SHORT).show()
+                        } else {
+                            update(item, title)
+                        }
+                    }
+                    .setNegativeButton("キャンセル", null)
+                    .setNeutralButton("削除") { _, _ ->
+
+                        AlertDialog.Builder(this@WordListActivity)
+                            .setTitle(item.title + "を削除しますか？")
+                            .setPositiveButton("削除") { _, _ ->
+                                delete(item)
+                            }
+                            .setNegativeButton("キャンセル", null)
+                            .show()
+                    }
+                    .show()
+
+            }
+        }
+
         val groupId = intent.getStringExtra("GroupId") ?: ""
         val wordList = readAll(groupId)
-        val adapter = WordAdapter(this, wordList, true)
+        val adapter = WordAdapter(this, listener, wordList, true)
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -46,6 +80,7 @@ class WordListActivity : AppCompatActivity() {
                         create(title, groupId)
                     }
                 }
+                .setNeutralButton("キャンセル", null)
                 .show()
         }
 
@@ -66,6 +101,18 @@ class WordListActivity : AppCompatActivity() {
             val word: Word = it.createObject(Word::class.java, UUID.randomUUID().toString())
             word.title = title
             word.groupId = groupId
+        }
+    }
+
+    fun update(word: Word, newTitle: String) {
+        realm.executeTransaction {
+            word.title = newTitle
+        }
+    }
+
+    fun delete(word: Word) {
+        realm.executeTransaction {
+            word.deleteFromRealm()
         }
     }
 

@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.OrderedRealmCollection
@@ -14,6 +15,7 @@ import java.util.*
 
 class WordAdapter(
     private val context: Context,
+    private var listener: WordAdapter.OnItemClickListener,
     private var wordList: OrderedRealmCollection<Word>?,
     private val autoUpdate: Boolean
 ) :
@@ -28,6 +30,9 @@ class WordAdapter(
         holder.dateTextView.text =
             SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.JAPANESE).format(word.createdAt)
 
+        holder.container.setOnClickListener {
+            listener.onItemClick(word)
+        }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): WordViewHolder {
@@ -38,6 +43,11 @@ class WordAdapter(
     class WordViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.titleTextView
         val dateTextView: TextView = view.dateTextView
+        val container: LinearLayout = view.container
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(item: Word)
     }
 
 }

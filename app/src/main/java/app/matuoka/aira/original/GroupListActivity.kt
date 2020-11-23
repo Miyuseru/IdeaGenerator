@@ -52,6 +52,7 @@ class GroupListActivity : AppCompatActivity() {
                         create(title)
                     }
                 }
+                .setNeutralButton("キャンセル", null)
                 .show()
         }
     }
