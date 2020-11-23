@@ -1,10 +1,13 @@
-package app.matuoka.aira.original
+package app.matuoka.aira.original.activity
 
 import android.os.Bundle
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import app.matuoka.aira.original.R
+import app.matuoka.aira.original.model.Word
+import app.matuoka.aira.original.adapter.WordAdapter
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmResults
@@ -24,7 +27,8 @@ class WordListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_word_list)
 
-        val listener = object : WordAdapter.OnItemClickListener {
+        val listener = object :
+            WordAdapter.OnItemClickListener {
             override fun onItemClick(item: Word) {
 
                 val editText = EditText(this@WordListActivity)
@@ -60,7 +64,13 @@ class WordListActivity : AppCompatActivity() {
 
         val groupId = intent.getStringExtra("GroupId") ?: ""
         val wordList = readAll(groupId)
-        val adapter = WordAdapter(this, listener, wordList, true)
+        val adapter =
+            WordAdapter(
+                this,
+                listener,
+                wordList,
+                true
+            )
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -98,7 +108,8 @@ class WordListActivity : AppCompatActivity() {
 
     fun create(title: String, groupId: String) {
         realm.executeTransaction {
-            val word: Word = it.createObject(Word::class.java, UUID.randomUUID().toString())
+            val word: Word = it.createObject(
+                Word::class.java, UUID.randomUUID().toString())
             word.title = title
             word.groupId = groupId
         }

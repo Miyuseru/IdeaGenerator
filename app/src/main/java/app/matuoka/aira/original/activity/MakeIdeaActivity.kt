@@ -1,7 +1,10 @@
-package app.matuoka.aira.original
+package app.matuoka.aira.original.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import app.matuoka.aira.original.R
+import app.matuoka.aira.original.model.Word
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
@@ -23,14 +26,24 @@ class MakeIdeaActivity : AppCompatActivity() {
         val firstGroupWordList = readAll(firstGroupId)
         val secondGroupWordList = readAll(secondGroupId)
 
-        ideaTextView1.text = firstGroupWordList[0]?.title
-        ideaTextView2.text = secondGroupWordList[0]?.title
-        
+        var firstRandomNum = 0
+        var secondRandomNum = 0
+
+        ideaTextView1.text = firstGroupWordList[firstRandomNum]?.title
+        ideaTextView2.text = secondGroupWordList[secondRandomNum]?.title
+
         nextButton.setOnClickListener {
-            val firstRandomNum = Random.nextInt(firstGroupWordList.size)
-            val secondRandomNum = Random.nextInt(secondGroupWordList.size)
+            firstRandomNum = Random.nextInt(firstGroupWordList.size)
+            secondRandomNum = Random.nextInt(secondGroupWordList.size)
             ideaTextView1.text = firstGroupWordList[firstRandomNum]?.title
             ideaTextView2.text = secondGroupWordList[secondRandomNum]?.title
+        }
+
+        memoButton.setOnClickListener {
+            val intent = Intent(this, IdeaActivity::class.java)
+            intent.putExtra("FIRST_WORD_TITLE", firstGroupWordList[firstRandomNum]?.id)
+            intent.putExtra("SECOND_WORD_TITLE", secondGroupWordList[secondRandomNum]?.id)
+            startActivity(intent)
         }
     }
 

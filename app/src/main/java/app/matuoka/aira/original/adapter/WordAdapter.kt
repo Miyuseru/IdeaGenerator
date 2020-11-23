@@ -1,4 +1,4 @@
-package app.matuoka.aira.original
+package app.matuoka.aira.original.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import app.matuoka.aira.original.R
+import app.matuoka.aira.original.model.Word
 import io.realm.OrderedRealmCollection
 import io.realm.RealmRecyclerViewAdapter
 import kotlinx.android.synthetic.main.item_word_list.view.*
@@ -15,7 +17,7 @@ import java.util.*
 
 class WordAdapter(
     private val context: Context,
-    private var listener: WordAdapter.OnItemClickListener,
+    private var listener: OnItemClickListener,
     private var wordList: OrderedRealmCollection<Word>?,
     private val autoUpdate: Boolean
 ) :

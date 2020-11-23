@@ -1,4 +1,4 @@
-package app.matuoka.aira.original
+package app.matuoka.aira.original.activity
 
 
 import android.content.Intent
@@ -7,6 +7,9 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import app.matuoka.aira.original.model.Group
+import app.matuoka.aira.original.adapter.GroupAdapter
+import app.matuoka.aira.original.R
 import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmResults
@@ -25,14 +28,20 @@ class GroupListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_group_list)
 
         val groupList = readAll()
-        val listener = object : GroupAdapter.OnItemClickListener {
+        val listener = object :
+            GroupAdapter.OnItemClickListener {
             override fun onItemClick(item: Group) {
                 val intent = Intent(applicationContext, WordListActivity::class.java)
                 intent.putExtra("GroupId", item.id)
                 startActivity(intent)
             }
         }
-        val adapter = GroupAdapter(this, listener, groupList, true)
+        val adapter = GroupAdapter(
+            this,
+            listener,
+            groupList,
+            true
+        )
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
@@ -69,7 +78,8 @@ class GroupListActivity : AppCompatActivity() {
 
     fun create(title: String) {
         realm.executeTransaction {
-            val group: Group = it.createObject(Group::class.java, UUID.randomUUID().toString())
+            val group: Group = it.createObject(
+                Group::class.java, UUID.randomUUID().toString())
             group.title = title
         }
     }

@@ -1,8 +1,9 @@
-package app.matuoka.aira.original
+package app.matuoka.aira.original.activity
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import app.matuoka.aira.original.R
 import kotlinx.android.synthetic.main.activity_start.*
 
 class StartActivity : AppCompatActivity() {

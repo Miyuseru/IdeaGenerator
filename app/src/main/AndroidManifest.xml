@@ -10,19 +10,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChoiceGroupActivity"></activity>
-        <activity android:name=".MakeIdeaActivity" />
-        <activity android:name=".GroupListActivity" />
+        <activity android:name=".activity.ChoiceGroupActivity"></activity>
+        <activity android:name=".activity.MakeIdeaActivity" />
+        <activity android:name=".activity.GroupListActivity" />
         <activity android:name=".list_item" />
-        <activity android:name=".WordListActivity" />
-        <activity android:name=".StartActivity">
+        <activity android:name=".activity.WordListActivity" />
+        <activity android:name=".activity.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".activity.IdeaActivity" />
     </application>
 
 </manifest>

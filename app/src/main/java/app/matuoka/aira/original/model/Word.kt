@@ -1,4 +1,4 @@
-package app.matuoka.aira.original
+package app.matuoka.aira.original.model
 
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
