@@ -3,7 +3,7 @@ package app.matuoka.aira.original.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import app.matuoka.aira.original.R
-import app.matuoka.aira.original.model.Word
+import app.matuoka.aira.original.model.Idea
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_idea.*
 import java.util.*
@@ -16,9 +16,17 @@ class IdeaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_idea)
 
+        val firstWordTitle = intent.getStringExtra("FIRST_WORD_TITLE") ?: ""
+        val secondWordTitle = intent.getStringExtra("SECOND_WORD_TITLE") ?: ""
+
+        firstWordTextView.text = firstWordTitle
+        secondWordTextView.text = secondWordTitle
+
         saveButton.setOnClickListener {
             val title: String = titleEditText.text.toString()
-            save(title)
+            val content: String = contentEditText.text.toString()
+
+            save(title, content, firstWordTitle, secondWordTitle)
             finish()
         }
     }
@@ -28,15 +36,17 @@ class IdeaActivity : AppCompatActivity() {
         realm.close()
     }
 
-    fun save(title: String) {
+    fun save(title: String, content: String, firstWord: String, secondWord: String) {
         realm.executeTransaction {
-            val word: Word = it.createObject(
-                Word::class.java, UUID.randomUUID().toString())
-            word.title = title
+            val idea: Idea = it.createObject(
+                Idea::class.java, UUID.randomUUID().toString()
+            )
+            idea.title = title
+            idea.content = content
+            idea.firstWord = firstWord
+            idea.secondWord = secondWord
 
         }
-
-//        Snackbar.make(container, "保存できました", Snackbar.LENGTH_SHORT).show()
     }
 
 }
