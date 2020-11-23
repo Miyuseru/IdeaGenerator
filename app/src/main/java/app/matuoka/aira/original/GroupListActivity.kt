@@ -1,7 +1,7 @@
 package app.matuoka.aira.original
 
 
-
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
@@ -25,7 +25,13 @@ class GroupListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_group_list)
 
         val groupList = readAll()
-        val adapter = GroupAdapter(this, groupList, true)
+        val listener = object : GroupAdapter.OnItemClickListener {
+            override fun onItemClick(item: Group) {
+                val intent = Intent(applicationContext, WordListActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        val adapter = GroupAdapter(this, listener, groupList, true)
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
