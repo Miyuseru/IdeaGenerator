@@ -7,22 +7,47 @@
     tools:context=".StartActivity">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/default_button"
         android:layout_width="116dp"
         android:layout_height="77dp"
-        android:layout_marginTop="217dp"
-        android:text="main"
+        android:layout_marginTop="70dp"
+        android:text="default単語から"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/custom_button"
+        android:layout_width="116dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="100dp"
+        android:text="カスタム単語から"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/default_button" />
+
+    <Button
+        android:id="@+id/GroupListButton"
+        android:layout_width="116dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="100dp"
+        android:text="カスタム単語"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custom_button" />
+
+    <Button
         android:id="@+id/button2"
         android:layout_width="112dp"
         android:layout_height="76dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="100dp"
         android:text="recycler"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/GroupListButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

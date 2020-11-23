@@ -22,7 +22,8 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center"
-            android:padding="10dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="70dp"
             android:text="ぐるーぷ１"
             android:textSize="18sp" />
 

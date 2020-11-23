@@ -1,13 +1,18 @@
 package app.matuoka.aira.original
 
-import android.content.Intent
 import android.os.Bundle
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
-import kotlinx.android.synthetic.main.activity_word_list.*
+import kotlinx.android.synthetic.main.activity_group_list.*
+import kotlinx.android.synthetic.main.activity_word_list.floatingActionButton
+import kotlinx.android.synthetic.main.activity_word_list.recyclerView
+import java.util.*
 
 class WordListActivity : AppCompatActivity() {
 
@@ -27,8 +32,20 @@ class WordListActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
 
         floatingActionButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            val editText = EditText(this)
+            editText.hint = "単語名"
+            AlertDialog.Builder(this)
+                .setTitle("単語の作成")
+                .setView(editText)
+                .setPositiveButton("作成") { _, _ ->
+                    val title: String = editText.text.toString()
+                    if (title.isBlank()) {
+                        Snackbar.make(container, "単語名を入れてね！！", Snackbar.LENGTH_SHORT).show()
+                    } else {
+                        create(title)
+                    }
+                }
+                .show()
         }
 
     }
@@ -40,6 +57,13 @@ class WordListActivity : AppCompatActivity() {
 
     fun readAll(): RealmResults<Word> {
         return realm.where(Word::class.java).findAll().sort("createdAt", Sort.ASCENDING)
+    }
+
+    fun create(title: String) {
+        realm.executeTransaction {
+            val word: Word = it.createObject(Word::class.java, UUID.randomUUID().toString())
+            word.title = title
+        }
     }
 
 }

@@ -11,7 +11,7 @@ class StartActivity : AppCompatActivity() {
         setContentView(R.layout.activity_start)
 
 
-        button.setOnClickListener {
+        GroupListButton.setOnClickListener {
             val tomainIntent = Intent(this, GroupListActivity::class.java)
             startActivity(tomainIntent)
         }
