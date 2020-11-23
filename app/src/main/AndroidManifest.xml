@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MakeIdeaActivity"></activity>
+        <activity android:name=".ChoiceGroupActivity"></activity>
+        <activity android:name=".MakeIdeaActivity" />
         <activity android:name=".GroupListActivity" />
         <activity android:name=".list_item" />
         <activity android:name=".WordListActivity" />

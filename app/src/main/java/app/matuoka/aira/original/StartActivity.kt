@@ -10,15 +10,19 @@ class StartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
 
-
-        GroupListButton.setOnClickListener {
-            val tomainIntent = Intent(this, GroupListActivity::class.java)
-            startActivity(tomainIntent)
+        makeIdeaButton.setOnClickListener {
+            val intent = Intent(this, ChoiceGroupActivity::class.java)
+            startActivity(intent)
         }
 
-        button2.setOnClickListener {
-            val torecyclerviewActivityIntent = Intent(this, WordListActivity::class.java)
-            startActivity(torecyclerviewActivityIntent)
+        groupListButton.setOnClickListener {
+            val intent = Intent(this, GroupListActivity::class.java)
+            startActivity(intent)
+        }
+
+        showIdeaButton.setOnClickListener {
+            val intent = Intent(this, WordListActivity::class.java)
+            startActivity(intent)
         }
     }
 }
