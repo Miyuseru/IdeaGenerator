@@ -22,7 +22,7 @@ class StartActivity : AppCompatActivity() {
         }
 
         showIdeaButton.setOnClickListener {
-            val intent = Intent(this, WordListActivity::class.java)
+            val intent = Intent(this, IdeaListActivity::class.java)
             startActivity(intent)
         }
     }

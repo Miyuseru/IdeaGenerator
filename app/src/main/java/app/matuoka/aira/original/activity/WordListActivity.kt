@@ -62,7 +62,7 @@ class WordListActivity : AppCompatActivity() {
             }
         }
 
-        val groupId = intent.getStringExtra("GroupId") ?: ""
+        val groupId = intent.getStringExtra("GROUP_ID") ?: ""
         val wordList = readAll(groupId)
         val adapter =
             WordAdapter(
